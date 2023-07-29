@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="images/Logo.png" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <title>FOOD EXPLORE</title>
+</head>
+<body>
+
+<style>
+  
+     body {
+    margin: 0;
+    padding: 0;
+    font-family: Monospaced;
+background-image: url("https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141353.jpg");
+  }
+
+ 
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 20px;
+  }
+
+.card-img-top {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+  }
+  
+    .image-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+   .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 20px;
+    background-color: #f1f1f1; 
+  }
+
+  
+  .grid-container {
+    display: none; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 20px;
+    background-color: #f1f1f1; 
+  }
+
+ 
+  .card {
+    
+    background-color: #fff; 
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+ 
+  .card-img-top {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+  }
+
+   
+    .image-card h2 {
+      font-size: 1.5rem;
+      margin: 10px 0;
+      padding: 0 10px;
+      color: #333;
+    }
+
+    
+    .image-card p {
+      font-size: 1rem;
+      margin: 0;
+      padding: 0 10px 10px;
+      color: #777;
+    }
+#navbarSupportedContent {
+margin-bottom: 30px;
+}
+.text_title {
+text-align: center;
+margin-top: 40px;
+margin-bottom: 20px;
+color: #f7b04d;
+font-size:60px; 
+font-family: Comic Sans MS;
+}
+.Search_btn {
+margin-left: 10px;
+}
+h1 {
+  max-width: max-content;
+  margin: 0 auto;
+  background: black;
+}
+ .logo {
+    width: 100px; 
+    height: 100px; 
+    object-fit: contain;
+    margin-left:80px;
+margin-top: 5px;
+border-radius: 50px;
+  }
+
+  </style>
+<div class="header">
+ <img src="images/Logo.png" alt="Logo" class="logo"></img>
+</div>
+<h1 class="text_title">FOOD EXPLORE</h1>
+  <nav class="navbar navbar-expand-lg navbar-light  navbar-custom">
+    <!-- <a class="navbar-brand" href="#"></a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ml-auto">
+            <input type="text" id="searchBar" placeholder="Enter location" style="width: 400px;">
+             <button class="Search_btn" onclick="handleSearch()">Search</button>
+        </ul>
+    </div>
+</nav>
+   
+<div class="grid-container container_bg" id="restaurant-cards-container"></div>
+ 
+<script>
+  const data = {
+    abids: [
+{
+name:"parampara",
+image:"https://lh3.googleusercontent.com/p/AF1QipOXPxsiqkFnO8hvuvBnjXB3B6TIE9fybcy1kX5c=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/3qELAdNEjE53r2AbA",
+},
+{
+name:"thalis",
+image:"https://lh3.googleusercontent.com/p/AF1QipMmsmS1BaqEQZAe7EoRipNjSgs6C6Z6lMgFTqit=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/xJq4YiSQ3aq4iQaP6",
+},
+{
+name:"Barbecue Spice",
+image:"https://lh3.googleusercontent.com/p/AF1QipNva6zMvC5auZtbpIIgTHiA6b3D2e1c8EfnWdcc=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/TeEGKzb8px6ssu4RA",
+},
+{
+name:"Taj Hotel",
+image:"https://res.cloudinary.com/simplotel/image/upload/x_90,y_0,w_960,h_540,r_0,c_crop,q_80,fl_progressive/w_825,f_auto,c_fit/taj-mahal-hotel-in-hyderabad/FAMILY_RESTAURANT_at_Taj_Mahal_Restaurant_in_Hyderabad_d60ypn",
+loc:"https://maps.app.goo.gl/KSETXojjsDHDGW3LA",
+},
+{
+name:"Grand Hotel",
+image:"https://lh3.googleusercontent.com/p/AF1QipM8c_66obVa7as3uhvk1_BIILct7yO0EVgo9wHY=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/UvdoyM2J6k1oaUsh8",
+},
+{
+name:"Venue Restaurant",
+image:"https://lh3.googleusercontent.com/p/AF1QipMpLEl0eZ6XNBIHKgrld6SIrvYjOO_ZBQXCosRB=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/9QzYrgpk2FZxxZ1y7",
+},
+{
+name:"Black Pearl Restaurant",
+image:"https://lh3.googleusercontent.com/p/AF1QipOifB5CWQ_ao7lX2-JhyamwkTh6iYxVTJpVuvlx=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/uXnWjPv9aBKmUnyb7",
+},
+{ name:"Abids Bistro",  
+image:"https://media-cdn.tripadvisor.com/media/photo-s/16/8b/5b/e2/ideal-for-business-discussions.jpg", 
+loc:"https://maps.app.goo.gl/tWzV3qtCZcvWzobK7",
+},
+{
+name:"The Dark 'O cafe",
+image:"https://lh3.googleusercontent.com/p/AF1QipNTvP6slik1LX1bXEB8nMcGY4-joWL07eIN3pRP=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/iKrPJdWdZZaSYx5K7",
+},
+{
+name:"Bench cafe",
+image:"https://content.jdmagicbox.com/comp/hyderabad/d7/040pxx40.xx40.170714174601.r5d7/catalogue/bench-cafe-and-restaurant-abids-hyderabad-home-delivery-restaurants-lrrdp.jpg?clr=#3d2929",
+loc:"https://maps.app.goo.gl/iKrPJdWdZZaSYx5K7",
+},
+{
+name:"lactonile",
+image:"https://lh3.googleusercontent.com/p/AF1QipM3Bl4DYJwkGh09syQYalagOCrOaGJxpZbmRgox=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/tcwoeSLTXTMd2dkt6",
+},
+{
+name:"KFC",
+image:"https://tse3.mm.bing.net/th?id=OIP.c4guy7AzjKbLP6B_BDEvAgHaEK&pid=Api&P=0&h=180",
+loc:"https://tse3.mm.bing.net/th?id=OIP.c4guy7AzjKbLP6B_BDEvAgHaEK&pid=Api&P=0&h=180",
+}   
+    ],
+    secunderabad: [
+{
+name:"Momo cafe",
+image:"https://4.bp.blogspot.com/-SSQQT2ejKAE/UE81k3r4xPI/AAAAAAAABtM/tkxBVTLdhg4/s1600/Momo+Cafe+Store2.jpg",
+loc:"https://maps.app.goo.gl/jcwoXaSHAJF1Xucr5",
+},
+{
+name: "Aura cafe", 
+image: "https://lh3.googleusercontent.com/p/AF1QipO1spWUpPz4XzW_TylyRYEYUShOFJGg-UEsgUJ6=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/aGLA4WGcXfgKe2dy6",
+        
+      },
+      {
+        name: "sage farm cafe",
+        image:"https://lh3.googleusercontent.com/p/AF1QipMjzkdPQ3c4DnoN4aUOycEob1aioechrm_nsTUp=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/DfUFUJ27kYY3Agvj9",
+       
+      },
+      {
+        name: "Back yardcafe",
+        image: "https://lh3.googleusercontent.com/p/AF1QipMfOW23N7PSV5f3DZiCYK7ZHl0lY_KpK0BPlmI3=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/u7BdXvvvXTeeymQaA",
+        
+      },
+      {
+        name: "ciclo cafe",
+        image:"https://lh3.googleusercontent.com/p/AF1QipPcr9tJDt-SAVSTJKF9mrNooA2BbnVUFHR5wY-g=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/s4U5ezoNQAHdk6iv9",
+       
+      },
+{
+        name: "farzi cafe",
+        image: "https://lh3.googleusercontent.com/p/AF1QipN1RtMAJzTkGVHlX9s4yEXqSkehV32QzaOpy-yn=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/s4U5ezoNQAHdk6iv9",
+        
+      },
+      {
+        name: "terrassen cafe",
+        image:"https://lh3.googleusercontent.com/p/AF1QipMmTijBaJ05ssBaQl_Qd_WhXaL6n8lubTqqkc04=s1360-w1360-h1020",
+ loc:"https://maps.app.goo.gl/vKZoKhyU9qiXCJ3K9",
+       
+      },
+{
+        name: "the gallery cafe",
+        image: "https://lh3.googleusercontent.com/p/AF1QipNVWzPBiQ0VJUPeh6k5dSyjvvM_3H98Ry8Dwutg=s1360-w1360-h1020",
+ loc:"https://maps.app.goo.gl/6mLJs5fySqReTjZ28",      
+      },
+       {
+        name: "paradise",
+image:"https://lh3.googleusercontent.com/p/AF1QipNk4SKrEMZf7lTmFiLArP0xE-EP2TLoy066XZYR=s1360-w1360-h1020",
+         loc: "https://maps.app.goo.gl/nUSt8G52QiwvbheC6",
+           },
+      {
+        name: "spicy garden",
+        image:"https://lh3.googleusercontent.com/p/AF1QipM3cOGF9ijE9UbObfnIFQQVTSHrnCZ3EuGbTT1H=s1360-w1360-h1020",
+ loc:"https://maps.app.goo.gl/JiNpZuneHbDR7dgRA",
+       
+      },
+{
+        name: "swathi veg resturant",
+        image: "https://lh3.googleusercontent.com/p/AF1QipOVCTo6Ub-5vK0k05YHOgvVcm_HORqw_ZMsuIg6=s1360-w1360-h1020",
+ loc:"https://maps.app.goo.gl/ZGzxsCiMXPjvXBSv6",    
+      },
+      
+{
+        name: "Taj mahal resturant",
+        image: "https://lh5.googleusercontent.com/p/AF1QipOxdXQkOinfyPIixXFhPns3WCFva1qswIq58fCh=w260-h175-n-k-no",
+ loc:"https://maps.app.goo.gl/UTr3TGDPfR72qRnMA",
+      },
+      {
+        name: "nanking chinese resturant",
+        image:"https://lh5.googleusercontent.com/p/AF1QipM3Y2W0SMTorD4vKKituWjm8DT8lY_B9tv2bBlQ=w101-h126-n-k-no-nu",
+loc:"https://maps.app.goo.gl/eJVorXZwUhyzFEe46",
+       
+      },
+{
+        name: "Maya bazar resturant",
+        image: "https://lh3.googleusercontent.com/p/AF1QipNbMyXKZY1VK5BnqCBYivQ3V3TTBzU6HrBJDMO5=s1360-w1360-h1020",
+ loc:"https://maps.app.goo.gl/ep7fJbrGJgnW6ytb6",    
+      },
+      {
+        name: "Alpha hotel resturant",
+        image:"https://lh3.googleusercontent.com/p/AF1QipNfDbpWu4ZXI6W2BpJ6Vlpn3hzXcF4W88KnQptF=s1360-w1360-h1020",
+ loc:"https://maps.app.goo.gl/NnfWQW5ocNeAQE1h6",
+       
+      },
+
+],
+    kukatpally:[
+    { 
+     name:"Old spicy restaurant",
+     image:"https://static01.nyt.com/images/2021/03/16/multimedia/00xp-spicy1/00xp-spicy1-mediumSquareAt3X.jpg",
+     loc:"https://maps.app.goo.gl/Gu87ETnxftpWCVuTA",
+      },
+      {
+       name:"panch sau restaurant", 
+      image:"https://lh5.googleusercontent.com/p/AF1QipMbMtCJBwMNrF0wGTPZKp25loF6Udpr3ZSGtRCQ=w800-h500-k-no",
+    loc:"https://maps.app.goo.gl/Wp5BvHw2aU6icpRV6",
+     },
+     { 
+       name:"Khandani Rajdhani",
+       image:"https://media-cdn.tripadvisor.com/media/photo-s/13/1a/18/11/the-entrance-to-the-restaurant.jpg",
+    loc:"https://maps.app.goo.gl/z5AweXFuutd2DC8MA",
+    },
+    {
+    name:"Pondu parottas",
+    image:"https://farm9.staticflickr.com/8586/16023214373_90552b64f6_o.jpg",
+     loc:"https://maps.app.goo.gl/EaSSZX6sfmXiyuBB6",
+    },
+    {
+     name:"Raja Rani ruchulu resturant ",
+     image:"https://lh3.googleusercontent.com/p/AF1QipPDEdC-jPP4_8TWJdphgrW58Sk-eFXTFFoaJ5mP",
+    loc:"https://maps.app.goo.gl/THU9UufWCGsA3chm7",
+    },
+    {  
+      name:"panchabakshya",
+ image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC9ILQpt5y4hboruLbgXnBp4OJkl1h7N_qKQ&usqp=CAU",
+    loc:"https://maps.app.goo.gl/JCXbDYNwXxw9wc7q7",
+   }, 
+   {
+   name:"Subbayya gari hotel",
+     image:"https://i0.wp.com/allinonedirectory.in/wp-content/uploads/2019/07/IMG_1898.jpg?resize=250%2C250&ssl=1",
+      loc:"https://maps.app.goo.gl/HYbCHnXRwaAHtQv88",
+    },
+   {
+     name:"Seasons restaurants and bar",
+     image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1cgEwgoY9vSGuvR_ey7Apj1-IBFJ2QfwJA&usqp=CAU",
+    loc:"https://maps.app.goo.gl/dhMGsbUMhjDf6xRk7",
+     },
+
+   ],
+    madhapur:[
+   {
+     name:"Kritunga Restaurant",
+     image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUZknsYs-kDAoiTjyA8iFFwssiMkDQk5pgBw&usqp=CAU",
+    loc:"https://maps.app.goo.gl/WzaMZpbFotKyQUzN9.",
+    },
+    { 
+      name:"Dildaar",
+      image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ2r6YYVjDp_cWzSHR9Gr8v873Qnbskn31vg&usqp=CAU",
+      loc:"https://maps.app.goo.gl/JzzuHeiDjHjkyj2d8.",
+      },
+      { 
+        name:"Flechazo",
+        image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBctZramGfncSibQ08DtyfTLRzeDAOztT-8g&usqp=CAU",
+     loc:"https://maps.app.goo.gl/uc2AupomADLfXext5.",
+     },
+     { 
+      name:"Ci Gusta",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtBqTsI2aykmDp47bbqP7TAXoYMElhnnCmCQ&usqp=CAU",
+loc:"https://maps.app.goo.gl/3Xe9AUw3FT65bvq69.",
+     },
+     { 
+       name:"Punjab Bistro",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS96NwRC4koam5HKyvJ6uIOCndTBWbeRo9GyQ&usqp=CAU",
+    loc:"https://maps.app.goo.gl/Aep2LWppBx4tbf4c6.",
+     },
+     { 
+       name:"Palamuru Grill",
+       image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-jTUnObVT-BbFxKroBmz5iuehI0iWM_WH8A&usqp=CAU",
+     loc:"https://maps.app.goo.gl/ATtiaEHra7jN1QGW8.",
+     },
+     { 
+       name:"Krishna's kitchen",
+      image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeVZgp6983tLzsWZYTWWj8avhbEl6tKSrskg&usqp=CAU",
+     loc:"https://maps.app.goo.gl/ecR8bJKtKssxUdsBA.",
+    }, 
+    {
+      name:"Girlfriend Mandi",
+      image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN6iARaLvidUJ3estFI-s67umMFhGJ5-AwTw&usqp=CAU",
+     loc:"https://maps.app.goo.gl/XJ6Jca5iJehPC11y9.",
+    },
+    {
+      name:"Fusion 9",
+      image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAklf1mIbuhRzRdLXwBhrxRN_12-dep5V1MQ&usqp=CAU",
+     loc:"https://maps.app.goo.gl/bK3mSaNayBj87rfx7.",
+     },
+     {
+       name:"The5inest Restaurant",
+       image:" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD9sC7o7mW5JvuQEi_V9VI_8OdWvRQ9V1AJg&usqp=CAU",
+    loc:"https://maps.app.goo.gl/KwMiBU666gUzpSWW6.",
+    },
+    {
+      name:"president dhaba",
+       image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkABzth-ZDmAKvhy755k8ECS9plcKG1T704g&usqp=CAU",
+      loc:"https://maps.app.goo.gl/777CpHzyiTbZEupj8.",
+    },
+    {
+      name:"The joint Al-mandi",
+      image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdsPUSZZGeGxBPYDnqRmrNnNLr5_1eWsShPw&usqp=CAU",
+    loc:"https://maps.app.goo.gl/X77aPce8JP9UbEK7A.",
+    },
+    {
+      name:"Amnesia Sky Bar",
+      image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXc018Elece46HOpLTnpjJ1uG0SeIJ9VEuig&usqp=CAU",
+    loc:"https://maps.app.goo.gl/EbnVFux7kwYjpa2G7.",
+    }
+    ],
+    gachibowli:[
+{
+name:"Ulavacharu",
+image:"https://th.bing.com/th/id/OIP.-NcbSU3sUp6cOVgbUJp_7AHaEK?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/p4tkRdoCGxsAw1be6?g_st=ic",
+},
+{
+
+name:"Shah ghouse hotel and restaurant",
+image:"https://b.zmtcdn.com/data/pictures/7/18207447/7d231fcd545a411888eb308104b1aacf_featured_v2.jpg",
+loc:"https://maps.app.goo.gl/QsMyqGjmyAWMvm269?g_st=ic",
+},
+{
+
+name:"Jonathans kitchen",
+image:"https://b.zmtcdn.com/data/pictures/6/96626/637eef5e94aa9c798b61b3b8f13e5aaa.jpg",
+loc:"https://maps.app.goo.gl/p2EvrBmsKHiZZpQx6?g_st=ic",
+},
+{
+
+name:"Al saba restaurant",
+image:"https://th.bing.com/th/id/OIP.qm_ECGBns1HVNgxDMV34ugHaDj?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/zq2gWCPHzd3EkE7w6?g_st=ic",
+},
+{
+
+name:"The nawaabs restaurant",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/9/t/p/p94674-165943806762e903f307715.jpg?tr=tr:n-xlarge",
+loc:"https://maps.app.goo.gl/2JtdTvzTmMN5KHUB8?g_st=ic",
+},
+{
+
+name:"over the moon brew",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/3/g/d/p33599-14986463505953874e28745.jpg?tr=tr:n-xlarge",
+loc:"https://maps.app.goo.gl/nBoTJXnNJi9sHkh48?g_st=ic",
+},
+{
+
+
+name:"Haiku the asian kitchen",
+image:"https://b.zmtcdn.com/data/pictures/7/19218007/45ef02a12013fe01d087fa81c85f71c2.jpg",
+loc:"https://maps.app.goo.gl/P3dXVAK3hv6xe6S27?g_st=ic",
+},
+{
+
+name:"Cafe Eclat",
+image:"https://th.bing.com/th/id/OIP.rn94Wcmma2Y6gcSjRM1SlwHaEO?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/TM44Stds6Jm2xkYw9?g_st=ic",
+},
+{
+
+name:"Driven cafe",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/2/u/e/p27987-15319449995b4fa02795ea2.jpg?tr=tr:n-xlarge",
+loc:"https://maps.app.goo.gl/zC9WWBLL5DMZense9?g_st=ic",
+},
+{
+
+name:"Hyderama cafe",
+image:"https://thegastronomictale.files.wordpress.com/2021/07/img_3250.jpg?w=860",
+loc:"https://maps.app.goo.gl/pLYhExAb9F61GiYF6?g_st=ic",
+},
+{
+
+name:"The bake factory",
+image:"https://th.bing.com/th/id/OIP.g4QQ6FgiTqDlvgXSxDsshQHaEN?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/dED3fq5N4uoywNMN7?g_st=ic",
+},
+{
+
+
+name:"Bob marley cafe",
+image:"https://b.zmtcdn.com/data/pictures/4/19947584/2b52cf8b2a42fc7d871851e34d9430cd.jpg",
+loc:"https://maps.app.goo.gl/DVEFeg3m9mFCnvg48?g_st=ic",
+},
+{
+
+
+name:"The factory cafe",
+image:"https://pbs.twimg.com/media/DgEIXCqWAAQqM8p.jpg",
+loc:"https://maps.google.com?q=The%20Factory%20Cafe%20Hyderabad,%20Veera%20Towers,%20Plot%20No%2027,%20SY%20No,%20131,%20PH%20111,%20APHB%20Colony,%20Gachibowli,%20Telangana%20500032&ftid=0x3bcb93aad3c1f321:0x4c5c9c338a327f00&hl=en-IN&gl=in&entry=gps&lucs=,47071704&g_st=ic",
+},
+{
+
+name:"Roast 24 seven",
+image:"https://b.zmtcdn.com/data/pictures/0/20388020/74e2f5163980d5450d849482544bfe56.jpg",
+loc:"https://maps.app.goo.gl/QAbsdQ6dTUvJhyEb7?g_st=ic",
+},
+{
+
+name:"Frespresso cafe",
+image:"https://www.smergers.com/media/businessphoto/220466-26639132594.jpg",
+loc:"https://maps.app.goo.gl/FoYiyGCTKiQUUazX6?g_st=ic",
+}
+
+],
+    "jubilee hills":[
+{
+name:"Antera",
+image:"https://th.bing.com/th/id/OIP.DfVAFisIdZ8kQenH6O1BeAHaE8?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/Qr1G7tBWGrPvFFVFA?g_st=ic",
+},
+{
+
+name:"Telangana Spice Kitchen",
+image:"https://th.bing.com/th/id/OIP.Mg-DaRqg4WgZMilcr-VcFwHaC4?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/gqoVEGZnYF9BtVXD6?g_st=ic",
+},
+{
+
+name:"Ulavacharu",
+image:"https://d4t7t8y8xqo0t.cloudfront.net/eazymedia/restaurant%2F652058%2Frestaurant120190506063855.jpg",
+loc:"https://maps.app.goo.gl/ozA4Jc4oUP6QqSus5?g_st=ic",
+},
+{
+
+name:"Rayalaseema Ruchulu",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/8/p/m/p811-16025061205f844d88e450c.jpg?tr=tr:n-xlarge",
+loc:"https://maps.app.goo.gl/4Ww9QFdELvYDKRdV7?g_st=ic",
+},
+{
+
+name:"The sky kitchen",
+image:"https://th.bing.com/th/id/OIP.QqY9yZUnGD4Ny0cL-60HsQHaE-?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/Ny3BEVZsNQPsvKkZA?g_st=ic",
+},
+{
+
+name:"voila",
+image:"https://th.bing.com/th/id/OIP.qtUF6CyXzgU3G9vj9jdPOgHaHa?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/Yka2PV9aBy8ufsm88?g_st=ic",
+},
+{
+
+name:"krishna patnam",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/e/i/p54070-15561869325cc18734e23ea.jpg?tr=tr:n-xlarge",
+loc:"https://maps.app.goo.gl/DQqJDJM5r7hn1MiLA?g_st=ic",
+},
+{
+
+name:"N grill",
+image:"https://b.zmtcdn.com/data/pictures/5/91765/39c96114216cfe8876f31b565161b791.jpg",
+loc:"https://maps.app.goo.gl/DybgwbtvGpiMUwBY6?g_st=ic",
+},
+{
+name:"Buffalo wild wings",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/3/i/z/p38125-15562860245cc30a48e2a12.jpg?tr=tr:n-xlarge",
+loc:"https://maps.app.goo.gl/1nmWaeRu1oVtYUpP7?g_st=ic",
+},
+{
+
+name:"Makau",
+image:"https://cdn.telanganatoday.com/wp-content/uploads/2022/02/Makau-in-Jubilee-Hills-is-the-new-favourite-hangout-spot-of-Hyderabadis.jpg",
+loc:"https://maps.app.goo.gl/3rQGJpHav7xxniXPA?g_st=ic",
+},
+{
+
+name:"Farzi cafe",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/3/w/w/p38061-15722550085db6b520e27ce.jpg?tr=tr:n-large",
+loc:"https://maps.app.goo.gl/Ukx13u1UrmDYCNTt7?g_st=ic",
+},
+{
+
+name:"Conchu",
+image:"https://th.bing.com/th/id/OIP.yDneTWSUu3epciq-wme0fwHaEg?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/CmvCHE6BB2BwgmQaA?g_st=ic",
+},
+{
+
+name:"Beluga",
+image:"https://th.bing.com/th/id/OIP.iR150EeQKbMxqXgdIEBgdgHaE8?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/yByR2qWoMLwDjk1QA?g_st=ic",
+},
+{
+name:"Humming bird cafe",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/i/p/p40990-15230156785ac75ffe737ae.jpg?w=1200",
+loc:"https://maps.app.goo.gl/QrwBvSKqmg92jTXr8?g_st=ic",
+},
+{
+name:"Cafe lilliput",
+image:"https://th.bing.com/th/id/OIP.Ou6ROqr7t1FJ3w5xMztzQAHaE8?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/MLMfc1uWhSScM9jA8?g_st=ic",
+},
+{
+
+name:"Tiger lilly",
+image:"https://th.bing.com/th/id/OIP.BFaskUOQINFGVE0gS3iDAwHaEK?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/TDV1ms4DLXuM7YqXA?g_st=ic",
+},
+{
+name:"By the bottle",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/n/h/p41054-15307881275b3df91febd49.jpg?w=1200",
+loc:"https://maps.app.goo.gl/NYuRxdW2mtkc1NNm7?g_st=ic",
+},
+{
+name:"Air live",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/1/n/w/p16685-15307034715b3cae6fdd810.jpg?tr=tr:n-large",
+loc:"https://maps.app.goo.gl/Kab6SnkTuxH98ALF6?g_st=ic",
+}
+],
+    "himayath nagar":[
+{
+name:"Cafe Niloufer",
+image:"https://lh3.googleusercontent.com/p/AF1QipPmovH5P7ErDSZFMm19rCCuZDIeGPasYEox1wpe=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/xwk3pLaojPBkTwxo9",
+      },
+{
+name:"Board Game Cafe",
+image:"https://lh3.googleusercontent.com/p/AF1QipMHIn6p_u4tbNx8C_zquuV-R3Ekfxw7HogCi5-_=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/UgyX3iffAXJifUZi6",
+},
+{
+name:"Minerva Coffee shop",
+image:"https://lh3.googleusercontent.com/p/AF1QipMcSFgt_jmlkYe4tB_PkhvX_NFfzWlk3HGTgsiY=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/oLYLD5zMGx5kZRvn9",
+},
+{
+name:"Drunken monkey",
+image:"https://lh3.googleusercontent.com/p/AF1QipNZ0G83ZywfzJvpnaeb4Fc1nsjuQcx3EsMlJb1p=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/DjUjNDM9WvwZaXXL9",
+},
+{
+name:"Straws the cafe",
+image:"https://lh3.googleusercontent.com/p/AF1QipMMDmydUItLXa8jpiLFEKMgbRVaDLvJWxbHDYxX=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/yv6XftS6GKFqSByeA",
+},
+{
+name:"Superly cafe",
+image:"https://lh3.googleusercontent.com/p/AF1QipP0XzpkLunMuHEBYc7soFPt8Pg0gHXRkhLDaqyX=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/yWrR8p71vK2zR9ia7",
+},
+{
+name:"Huber and Holy cafe",
+image:"https://lh3.googleusercontent.com/p/AF1QipNxbuLxzKBJP1uEMqCNm7ym59jEzI6Um_zs_VFH=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/F7bKq91ip7KKiQpm8",
+},
+{
+name:"The Coffee Club",
+image:"https://lh3.googleusercontent.com/p/AF1QipMdguhqV-HsaIuv3BBV5YLGAygRD5fnjvCarJLU=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/KgHe2Tv84bP4WJ3u6",
+},
+{
+name:"Mirosa cafe",
+image:"https://lh3.googleusercontent.com/p/AF1QipOQdj_vT0lzZOaPVCwj-ysrjd0O9j6-nrVlSIPl=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/Ztp8DakVfJHx4h6H6",
+},
+{
+name:"House of cafe",
+image:"https://lh3.googleusercontent.com/p/AF1QipPr4Xl-ziP6PXJixDdAp_sBoYckwymT0QfCWFwL=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/6SUiYGFNzu1SpzNq9",
+},
+{
+name:"shri Santosh Dhabha",
+image:"https://lh3.googleusercontent.com/p/AF1QipMgg2Dd5HKH1Nw_CFzpK-LyWU1vYUxIpKUaHF-1=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/C7zv9oCnPtEX1UEY7",
+},
+{
+name:"Haiking restaurant",
+image:"https://lh3.googleusercontent.com/p/AF1QipPEJdfaDeJUe9I6VKVSVQOBvA5TUQRhoRKdpRuB=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/hqRvoYp5Jruhhykd6",
+},
+{
+name:"Rice Bowl",
+image:"https://lh3.googleusercontent.com/p/AF1QipObGfPBivw2q_2ZaG3UyTDS_zeUMYuZvpRjkUNK=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/PcoSeoBvPCfTJ5Ja9https",
+},
+{
+name:"Alex's Kitchen",
+image:"https://lh3.googleusercontent.com/p/AF1QipNFGKImH9ilkDCxADOOtTPtkaEZEY9cfpwOtYNK=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/CAU4Mduq67tySgPo9",
+},
+{
+name:"Clove vegeterian restaurant",
+image:"https://lh3.googleusercontent.com/p/AF1QipO_T5VUM1laxeGgjckbhOC6-h-XQ6fbN6LTVA37=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/NLavDMbD8p4i1ujR9",
+},
+{
+name:"The Chef's Pot",
+image:"https://lh3.googleusercontent.com/p/AF1QipNjkJFhYrJykPwUGoQuPIw2kjJ4vd9b762I48RE=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/24jUpUBd4ypr1MKY8",
+},
+{
+name:"Blue Fox",
+image:"https://lh3.googleusercontent.com/p/AF1QipMIEt7V3DY_axvJ4SklN1sIR7bmcxgTj5iKcof1=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/KvKDAjAXnRoD4pXa9",
+},
+{
+name:"Kritunga",
+image:"https://lh3.googleusercontent.com/p/AF1QipNfOxcxgBirXwwbqYQN-gooOzvqnrnVZIdxniTt=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/WphjkmKxNrbMxtpQ6",
+},
+{
+name:"Angara Kebabs",
+image:"https://lh3.googleusercontent.com/p/AF1QipNXayMuHuMR7GYRUYfmNueuxS9hqUayfwhakXnd=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/Sn2TxMufFB68d7zU6",
+},
+{
+name:"A Bleu Basil",
+image:"https://lh3.googleusercontent.com/p/AF1QipNXpD2GghVhRGwzv47xS-QXLfgj1O_vUAbU2LEA=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/wCRUk4jZznzvoFh58",
+},
+{
+name:"Vintage restaurant",
+image:"https://lh3.googleusercontent.com/p/AF1QipNDXO1jECbG6FtkRQK0EYqVnnYl-js9IMvJOn5G=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/tG86imDAZrzaAXiJA",
+},
+{
+name:"Narmada's Rasoi",
+image:"https://lh3.googleusercontent.com/p/AF1QipPT8EwNv6WYB2SvtfFFxCptdt_B-AJqswfUwzo5=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/K3JPaB58tU2Df2VR8",
+},
+{
+name:"Grabz",
+image:"https://lh3.googleusercontent.com/p/AF1QipPkQCeuIpZ2zrmwyXeA53ta_OwjLga2VRcGWjQG=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/FGkqxFNafXzYT1Ve7",
+}
+],
+"necklace road": [
+      {
+        name: "Minerva Coffee ",
+image:"https://lh3.googleusercontent.com/p/AF1QipP4n5M_y1lFo5wGxt4tjYik_DYHL5WN2rb0QerR=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/oLYLD5zMG",
+      },
+      {
+        name: "Neera cafe necklace road",
+        image:"https://lh3.googleusercontent.com/p/AF1QipMkVKn1dVcqbbq2SyvXvNgtvpjapshjC4c3GKbh=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/NJDr6YhCkkzngAdS6",
+      },
+{
+        name: "Victory Resturant", 
+               image:"https://lh3.googleusercontent.com/p/AF1QipMqXfO_kMij7N1H8XZwZ031MvO9kild101s3zQW=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/qDYvqH2LcjRyWW5o6",
+      },
+      {
+        name: "Signature grills",
+        image:"https://lh3.googleusercontent.com/p/AF1QipO01sbJ7G6GnhSEZMFD-RQfKdq3Ckxg5C6KbvqN=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/WGEeJF5Bbza6osaM7",
+             },
+{
+        name: "Golden cafe",
+        image: "https://lh3.googleusercontent.com/p/AF1QipMgukb1m-DwWVMqsYApuzm3X7DxAT2c3IDcMdX3=s1360-w1360-h1020",
+loc:"https://maps.app.goo.gl/Ss57ggtas7fS2NkB7",
+         }
+         ],
+"lb nagar": [
+  { 
+name: "mirchi",      
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_G00r-BleJkGIrgmKZmn7XohOXXOWOMJlmN-m5RT4TikqdEbNz1n9BOo7tA&s",
+ loc:"https://goo.gl/maps/bBr6XLEJCtBcm9f9A",
+},
+{
+ name:"lucky restaurant",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdAcPCkXVuX68qztexGUdMxrdT4y-5A9twYSXr8ZrfxqOeOkzm1fUxtW0LCXc&s",
+loc:"https://goo.gl/maps/zGrVR5a7CG7fJGwe8",
+},
+{ 
+  name:"eat cock resto and jail mandi", 
+ image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1FbF7mO6Z-kptWMqs8G9yyDjByOtYboyky6Ae13sLdxsDj78NDbq6bjia6bs&s",
+ loc:"https://goo.gl/maps/Y1DEAFhbtUDvTAHQ6",
+},
+{
+name:"mr chef mandi house",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7jbZ8p4vg4QQ5cnyZC9o-xfB7YDCQ8_kYlqVuOzp_H4TMrRwLu222aRJY6Q&s",
+loc:"https://goo.gl/maps/LMSFKS9yVKqEdBmt6",
+},
+{
+name :"la pino’z pizza",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRZBjTnKx9YB1Q43DE4XhKjN6Lt0kj1LkWKfaeNiwbE9eF4tRxYLjGnqvT6Qs&s",
+loc:"https://goo.gl/maps/R5vWJTkHteB1GNaS7",
+},
+{
+name:"fresh byte pizza house",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRHgceZ2EsVv51KRccIelOyV7ChrztQyZmLk6sL_oOZXdn1t6x0LmEvbsUCw&s",
+loc:"https://goo.gl/maps/tmAczy5XVKKZFnuo8",
+},
+{
+name:"ganesh hotel",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkXxvWC8N_c7yPJPAGUyneqPOEJMUQlezx0hesd04DzweoHBFCXnKioF8rjQo&s",
+loc: "https://goo.gl/maps/P8iT4Cyd3WLBxU9d8",
+},
+{
+name:"shanker vilas centre",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxCwV6tO-xWiKV0awyPCNUvLaHIi461MbPuKNRoMoBq88eBxMWX3u_XiEMDA&s",
+loc :"https://goo.gl/maps/CUNUDrYTDnyCPtDL9",
+},
+{
+name :"over the flow",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsIqxk-MnaKh7008gpFdSGi7AQWwLSVGvapgyFXJQj9hx8i_38krGyhwJZPIU&s",
+loc:"https://goo.gl/maps/1DvQFiY4ug3uvfbJ6",
+},
+{
+name:"navarasa restaurant",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_70FxqfDZpkaf_6Rf09Fqeqofz1ziI0AEWVSuBSWiMZ2N8rNRbIFukDOrTw&s",
+loc:"https://www.google.com/maps/place/Navarasa+Restaurant/data=!4m7!3m6!1s0x3bcb99ef6a7c0ac3:0xe3b3286d2ae77abd!8m2!3d17.3722997!4d78.5578536!16s%2Fg%2F11trhfpb12!19sChIJwwp8au-ZyzsRvXrnKm0os-M?authuser=0&hl=en&rclk=1",
+},
+{
+name:"south 61 kitchen",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4IvjxIag9MS2jZkPKRuHpd1ytjlrXCfFEe9gqI2VH40mpUB9Vd-b0KXxDmF8&s",
+loc:"https://goo.gl/maps/yxawy55P6eZfyXGj6",
+},
+{
+name:"bachelor’s kitchen",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3Pw4eQf6cjuwZq-nT0Xs4PiZbujTQbaGSGcNB50Q292CCP8vFvpBBBJAo2Bk&s",
+loc:"https://goo.gl/maps/ecqnmrCSHW7svXh4A",
+},
+{
+name:"sithara grand",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSTb2bEYizoWtF27DBwy3TLB4hrp_L5QfHO72dbIk4dDzelZuWI2CaHrBSkA&s",
+loc:"https://goo.gl/maps/VGTWBnUnSyapHbHq7",
+},
+{
+name:"faasos",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvO_38Hnt9HqUdv7oKJ2yYabP6PdZPHbHJmqNsMlNz9pACc-SVaf7oKXcO-7I&s",
+loc:"https://goo.gl/maps/yvTp9AxdEUAYcVvS7",
+},
+{
+name:"escobar and restaurant",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsjbyahyLcs0ZatdVW9OSw7tjcvl0w2N6AgX0YRTGlJzfGPj5qZiEXpzNxLQ&s",
+loc:"https://goo.gl/maps/BdnQCLarTXDbfa9V8",
+},
+{
+name:"urban junction",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxuKJNBP9r0R1qzuNEITSzAUWemPabx4cbJzfCUZM2XDEhFU-tzJG01GZofww&s",
+loc:"https://goo.gl/maps/PP2yFtD53iVGe3JV9",
+},
+{
+name:"urban beats",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTObKHHvCu761y0urqvRI0lxLz8VCRfDrbYNy7In2bTiGowuMdohztvai-hEA&s",
+loc:"https://goo.gl/maps/FRQoNRYjwCcb5tbv7",
+},
+{
+name:"rana rasoi",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD1v2gKY9A6aaTTVyR59eEtLQCy1_M7KhLOiPf4kJ3MnxBf7wN6AZ8Ln1rtCY&s",
+loc:"https://goo.gl/maps/u2h9naq2hk3DHyfD9",
+},
+{
+name:"new india cafe",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYBu7ZfcLssy9uDoX_xP0Q8vaUI3fLT4L2UrKN2UX0E18k1TYdx_uLmakGLUc&s",
+loc:"https://goo.gl/maps/3R4LQAF2WPmrUUWL6",
+},
+{
+ name:"cafe love birds",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToc0U-2T3Nlo7f_gy4knf_nkIGnR_uHikz6j_UZSuyjC-uKfm60VnDeo3Ssg&s",
+loc:"https://goo.gl/maps/zjurDRrqz1W3beZG7",
+},
+{
+name:"friends cafe",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkixxexy98l6e_SX_AgWRYQg7k9O2LuxzWFvMV9jFBl4ZnV0hXHqGUZMkZEMM&s",
+loc:"https://goo.gl/maps/4ki8sT7L8w272Pri8",
+},
+{
+name:"chutneys",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOXWtxXrn0Qoh9mWi0mvTjz1TdDvjr8hZyrcOR0fSU9mJgoUbiaah6JUYl5Q&s",
+loc:"https://goo.gl/maps/PJRis4GMPwm5MxrU7",
+},
+{
+name:"zip n rev garage cafe",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkggaPu7Yj9BoMIJvD7cP8QS7SDa1kwviBL2oss-zTBlEeuJIUE3xj4T6S1SA&s",
+loc:"https://goo.gl/maps/m2rjvgnEPnCU4Fvc6",
+},
+{
+name:"maker of milkshakes",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPRCsW-IyZUuG5jab9v_a_qNH5uP1L7dst-FeabeF23S9lZ61PvbWd29y8yQ&s",
+loc:"https://goo.gl/maps/roU7FZmVy2TsS88a7",
+}
+],
+sainikpuri:[
+{
+name:"ren yi restaurant ",
+image:"https://th.bing.com/th/id/OIP.MfEg9vUJ3PNvamsrdhgjRgAAAA?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/a3dR2X3J5yTrbamw5 ",
+},
+{
+name:"vivaha bhojanambu",
+image:"https://media-cdn.tripadvisor.com/media/photo-s/14/71/79/20/photo2jpg.jpg",
+loc:"https://maps.app.goohttps://th.bing.com/th/id/R.85c63f42fcc645f759939da31b9bd158?rik=l8UKXVLT3J%2bHFA&riu=http%3a%2f%2fhyderabadd.com%2fwp-content%2fuploads%2f2018%2f03%2fVivaha-Bhojanambu-Restaurant-300x200.png&ehk=n0YjHtxF6%2f2fbYLf9heJOyQ8AlonvxTNgZHNTfwNtxs%3d&risl=&pid=ImgRaw&r=0.gl/b9hgEx99PwoSYmB38",
+},
+{
+name:"f3 cafe and bistro",
+image:"https://im1.dineout.co.in/images/uploads/restaurant/sharpen/6/d/k/p60804-15664591595d5e4517d9c83.jpg?tr=tr:n-xlarge", 
+loc:"https://maps.app.goo.gl/nZNy86R9hb5LMMev6",
+},
+
+{
+name:"musine garden restaurant",
+image:"https://th.bing.com/th/id/OIP.bBQk4aziowqOAPbatM0VegHaDa?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/eMtbkhwe44UMCC9f9",
+},
+
+{
+name:"mandi 46",
+
+image:"https://tse2.mm.bing.net/th?id=OIP.ujsPM0P8tmW7-VnY5l-VsAHaFj&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/JPNReYUMvHjis19T9",
+},
+{
+name:"subway",
+image:"https://tse3.mm.bing.net/th?id=OIP.Ld-zKTGJL5Dm93AmjfK6DQHaE7&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/RdH6YHAaRuiQCgjV8",
+},
+{
+name:"hyjack drive",
+image:"https://th.bing.com/th/id/OIP._kuqeqatiRC47yMmdtfopgHaC0?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/A13jpu6mZjwhc3Nm9",
+},
+{
+name:"1989 pizza and thickshakes",
+image:"https://tse3.mm.bing.net/th?id=OIP.LagjGp-oiwjc8jCbGQZU5QHaHI&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/GWVnJDx1WtjcFNn29",
+},
+{
+name:"punjabi chaap corner",
+image:"https://tse2.mm.bing.net/th?id=OIP.A1IqN_Gs3ZkAowFEQzMrQAHaHa&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/aapvxUpZizn7uLuPA",
+},
+{
+name:"shakes town",
+image:"https://tse2.mm.bing.net/th?id=OIP.1XTAYOB_sz1M5wxZq6v1KwHaEK&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/Hc17cx6SWAXZBx3AA",
+},
+{
+name:"red bucket biryani ",
+image:"https://tse4.mm.bing.net/th?id=OIP.6O_qHIrQX21GUWIQmoCRiAHaFj&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/sMjjapjHAAXmerej9",
+},
+{
+name:"reliance bar and restaurant ",
+image:"https://tse2.mm.bing.net/th?id=OIP.EdQ9QHHyb8qo6rU37tD6BgAAAA&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/BcLxmPHVeHYeKNpg8",
+},
+{
+name:"oldies kitchen and cafe",
+image:"https://tse1.mm.bing.net/th?id=OIP.FdbsVW4dpxYC_io4IpTv0gHaFj&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/xHY7r6CkZ4W9QMzG7",
+},
+{
+name:"chai kahani",
+image:"https://th.bing.com/th/id/OIP.BT5sqg6UU3MCQ3eT86VluwAAAA?pid=ImgDet&rs=1",
+loc:"https://maps.app.goo.gl/KAZEvFkPbzVtdpiS6",
+},
+{
+name:"concu",
+image:"https://tse1.mm.bing.net/th?id=OIP.RcjwPGy4odEbk44ouWvyCAHaEo&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/pxTyPuropdovjwPu8",
+},
+{
+name:"millet kitchen",
+image:"https://tse3.mm.bing.net/th?id=OIP.lpvFb2uh5tJ96LVfcMNWOgAAAA&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/8pqxV9ci5u2RPHzN8",
+},
+{
+name:"Starbucks ",
+image:"https://tse4.mm.bing.net/th?id=OIP.RiVw1raQneluM0i2S_0m3QHaFj&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/uLgSUgM4mzwPrEov9",
+},
+{
+name:"mastea",
+image:"https://tse3.mm.bing.net/th?id=OIP.gZHWMih1tz1TCJB1bTPQqgHaGW&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/oN2S6LShDk7EivhM8",
+},
+{
+name:"elite cafe and bistro",
+image:"https://tse4.mm.bing.net/th?id=OIP.44m-Y_nNJiEONu8E71tNYgHaDo&pid=Api&P=0&h=180",
+loc:"https://maps.app.goo.gl/SzLMUhyco4Ch3DQBA",
+},
+
+]
+    };
+  
+function handleSearch() {
+    const location = document.getElementById("searchBar").value.trim().toLowerCase();
+    const container = document.getElementById("restaurant-cards-container");
+
+    if (data[location]) {
+      showRestaurantCards(data[location]);
+      container.style.display = "grid"; 
+    } else {
+      alert("Location not found!");
+      container.style.display = "none"; 
+    }
+  }
+
+  function showRestaurantCards(restaurants) {
+    const container = document.getElementById("restaurant-cards-container");
+    container.innerHTML = ""; 
+
+    restaurants.forEach(restaurant => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.style.width = "18rem";
+	card.style.backgroundColor = "#FCF9ED"
+
+      const cardImage = document.createElement("img");
+      cardImage.classList.add("card-img-top");
+      cardImage.src = restaurant.image;
+      cardImage.alt = restaurant.name + " image";
+      card.appendChild(cardImage);
+
+      const cardBody = document.createElement("div");
+      cardBody.classList.add("card-body");
+
+      const cardTitle = document.createElement("h5");
+      cardTitle.classList.add("card-title");
+      cardTitle.textContent = restaurant.name;
+      cardBody.appendChild(cardTitle);
+
+      const cardText = document.createElement("p");
+      cardText.classList.add("card-text");
+      cardText.textContent = restaurant.desc;
+      cardBody.appendChild(cardText);
+
+      
+const cardLink = document.createElement("a");
+cardLink.classList.add("a", "a");
+cardLink.href = restaurant.loc; 
+cardLink.target = "_blank"; 
+cardLink.textContent = "Google location";
+cardBody.appendChild(cardLink);
+
+      card.appendChild(cardBody);
+      container.appendChild(card);
+    });
+  }
+</script>
+
+
+</body>
+</html>
